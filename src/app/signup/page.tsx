@@ -7,14 +7,18 @@ export default function SignupPage() {
     const { signup } = useAuth();
     const [formData, setFormData] = useState({ name: "", email: "", password: "" });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
+        setLoading(true);
         e.preventDefault();
         setError("");
         try {
             await signup(formData);
         } catch (err: any) {
             setError(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -40,7 +44,7 @@ export default function SignupPage() {
                             type="text"
                             required
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-(--primary) transition-all"
-                            placeholder="John Doe"
+                            placeholder="Your Name"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -51,7 +55,7 @@ export default function SignupPage() {
                             type="email"
                             required
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-(--primary) transition-all"
-                            placeholder="you@example.com"
+                            placeholder="Your Email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
@@ -62,14 +66,14 @@ export default function SignupPage() {
                             type="password"
                             required
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-(--primary) transition-all"
-                            placeholder="••••••••"
+                            placeholder="Your Password"
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                     </div>
 
                     <button type="submit" className="w-full primary-button mt-2">
-                        Sign Up
+                        {loading ? "Signing Up..." : "Sign Up"}
                     </button>
                 </form>
 
