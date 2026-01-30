@@ -32,7 +32,7 @@ export default function UniversitiesPage() {
         if (!query) return;
         setIsSearching(true);
         try {
-            const res = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(query)}`);
+            const res = await fetch(`/api/universities/search?name=${encodeURIComponent(query)}`);
             const data = await res.json();
             // console.log({ data });
             const formatted = data.slice(0, 10).map((u: any) => ({
