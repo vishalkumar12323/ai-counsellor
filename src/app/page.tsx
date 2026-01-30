@@ -39,7 +39,7 @@ export default function Home() {
               Start Your Journey
             </Link>
             <Link href="/login" className="glass-button text-lg justify-center">
-              Login to existing account
+              Login to account
             </Link>
           </div>
         </div>
